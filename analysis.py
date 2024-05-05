@@ -13,10 +13,14 @@ def rotate_frame(df):
         series_name = row['Series Name']
         series_code = row['Series Code']
         if series_code not in series:
-            series[series_code] = {'name': series_name}
+            series[(series_code, series_name)] = {}
         for year, year_col in zip(years, yr_cols):
-            series[series_code][year] = row[year_col]
+            series[(series_code, series_name)][year] = row[year_col]
 
+    rotated = pd.DataFrame(series)
+    rotated.index.name = 'Year'
+    # print(rotated, rotated.index)
+    # exit(1)
     return pd.DataFrame(series)
 
 
@@ -50,4 +54,5 @@ if __name__ == "__main__":
     for country, frame in country_frames:
         frame = rotate_frame(frame)
         snake_country = country.lower().replace(" ", "_")
-        frame.to_csv(f"{snake_country}.csv", index=False)
+        print(frame)
+        frame.to_csv(f"{snake_country}.csv", index=True)
