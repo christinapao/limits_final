@@ -14,8 +14,17 @@ We used two sources for our data:
     1. Clean and manipulate the world bank data: `python analysis.py -d PATH_TO_WORLD_BANK_DATA`
     2. Join the two datasets together: `python join.py --input PATH_TO_OUTPUT_STEP_1 --idb PATH_TO_IDB_5YR_FILE`
 
-Prediction_Forecast generates 3 prediction models: Decision Tree Regressor, Random Forest Regressor, and Gradient Boosted Regressor. It then backtests the results, and compares the result to the actual predictions.
+## Models
 
-Two main pieces of data:
-country_record: map from countries (located in notebook) to a 2D array. The first dimension is the type of classifier (Decision Tree Regressor, Random Forest Regressor, and Gradient Boosted Regressor), and the second dimension is backprediction from 2020 to 1960.
-country_pop: map from countries to a 1D array, which records the actual population figures of the country
+- The file `Forecast_population.ipynb` is a Jupyter Notebook used during the model development process. The same functionality is produced as a script in `model.py`. The two are functionally identical. For simplicity's sake, we discuss `model.py` here.
+- The script should run without any arguments under the assumption that the joined data being used is `joined_data.csv`. If not, it takes an optional parameter to specify an input file:
+    * `python model.py --data PATH_TO_DATA`
+- The script performs the training and prediction for all six models used in our experiments: Gradient boost, random forest, and decision tree for both forward and backwards prediction. Results are outputted as pickle files which can be used in the next step to reproduce the graphs included in our writeup.
+
+## Graphs
+
+NOTE: We had to manually tweak the tikzplotlib package due to its reliance on a deprecated function in the current version of matplotlib (a three line change). This is not included in the repository, and the graphing script should function without it as long as the tikzplotlib specific code is omitted. Should this prove problematic, please contact us!
+
+- Producing the graphs should be simple: `graph.py` takes as input a data file and a title and produces both the centered and full graphs for the given data file.
+    * To produce the forward graphs: `python graph.py --data PATH_TO_FORWARD_RESULTS.pickle --title TITLE`. Output in `title.tex/png` and `title_zoomed.tex/png`
+    * To produce the back graphs: `python graph.py --data PATH_TO_BACKWARD_RESULTS.pickle --title TITLE`. Output in `title.tex/png` and `title_zoomed.tex/png`

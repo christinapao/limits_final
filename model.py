@@ -72,8 +72,7 @@ def fill_na_simple(df):
     return df
 
 def forward_predict(df, country_df):
-    
-    # Do something a little hacky to just generate some kind of graph
+    """perform training and forward prediction for all three kinds of models"""
     target = 'POP'
     x_train, y_train = df.drop(target, axis=1), df[target]
     x_test, y_test = country_df.drop(target, axis=1), country_df[target]
@@ -101,6 +100,7 @@ def forward_predict(df, country_df):
     return results
 
 def back_predict(df, country_df):
+    """perform training and back prediction for all three kinds of models"""
     target = 'goal'
     x_train, y_train = df.drop(target, axis=1), df[target]
     x_test, y_test = country_df.drop(target, axis=1), country_df[target]
@@ -163,6 +163,7 @@ if __name__ == "__main__":
         results = forward_predict(forward_valid, country_frame)
         fwd_results[code] = results
     
+    # Dump the results so that we can graph
     dict_bytes = pickle.dumps(fwd_results)
     with open("fwd_results.pickle", "wb") as f:
         f.write(dict_bytes)
@@ -181,6 +182,7 @@ if __name__ == "__main__":
         results = back_predict(back_valid, country_frame)
         back_results[code] = results
 
+    # Dump the results so that we can graph
     dict_bytes = pickle.dumps(back_results)
     with open("back_results.pickle", "wb") as f:
         f.write(dict_bytes)
