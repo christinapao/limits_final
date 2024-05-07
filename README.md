@@ -13,3 +13,9 @@ We used two sources for our data:
 - To reproduce the above file, two steps need to be taken:
     1. Clean and manipulate the world bank data: `python analysis.py -d PATH_TO_WORLD_BANK_DATA`
     2. Join the two datasets together: `python join.py --input PATH_TO_OUTPUT_STEP_1 --idb PATH_TO_IDB_5YR_FILE`
+
+Prediction_Forecast generates 3 prediction models: Decision Tree Regressor, Random Forest Regressor, and Gradient Boosted Regressor. It then backtests the results, and compares the result to the actual predictions.
+
+Two main pieces of data:
+country_record: map from countries (located in notebook) to a 2D array. The first dimension is the type of classifier (Decision Tree Regressor, Random Forest Regressor, and Gradient Boosted Regressor), and the second dimension is backprediction from 2020 to 1960.
+country_pop: map from countries to a 1D array, which records the actual population figures of the country
