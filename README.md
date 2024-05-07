@@ -28,3 +28,7 @@ NOTE: We had to manually tweak the tikzplotlib package due to its reliance on a 
 - Producing the graphs should be simple: `graph.py` takes as input a data file and a title and produces both the centered and full graphs for the given data file.
     * To produce the forward graphs: `python graph.py --data PATH_TO_FORWARD_RESULTS.pickle --title TITLE`. Output in `title.tex/png` and `title_zoomed.tex/png`
     * To produce the back graphs: `python graph.py --data PATH_TO_BACKWARD_RESULTS.pickle --title TITLE`. Output in `title.tex/png` and `title_zoomed.tex/png`
+
+## Writeup
+
+Our writeup of our findings is `kaashoek_pao_zhao_limitsfinal.pdf`.
