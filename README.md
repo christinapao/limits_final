@@ -1,6 +1,15 @@
 # limits_final
 
-- `joined_data/` has the data that results from joining the world bank data with the international database. Currently just using variables from the `SP.POP` series in the world bank data, but can be easily changed
-- `join.py` produces the files above. Usage: `python join.py --input PATH_TO_WORLDBANK_FILE --idb PATH_TO_IDB_5YR_FILE --code ISO2_COUNTRY_CODE`
-    * Example: `python join.py --input cambodia.csv --idb idb5yr.txt --code kh`
-- `analysis.py` produces the country-by-country csvs from the world bank data and turns them into the same general format as the idb data (rows as years, cols as variables)
+Please reach out if there are any questions or concerns with the code in this project. We used Python for all steps of the project; the packages we used can be found in `requirements.txt`.
+
+## Data
+
+We used two sources for our data:
+
+- The IDB, found [here](https://www.census.gov/programs-surveys/international-programs/about/idb.html). The provided link downloads two files; we used `idb5yr.txt` for all our analysis.
+- The World Bank World Development Indicators, found [here](https://databank.worldbank.org/source/world-development-indicators). We used a subset of the possible indicators.
+- The result of joining the two datasets is in `joined_data.csv`.
+- We also provide the file `codes.csv`, which we used as part of the join process
+- To reproduce the above file, two steps need to be taken:
+    1. Clean and manipulate the world bank data: `python analysis.py -d PATH_TO_WORLD_BANK_DATA`
+    2. Join the two datasets together: `python join.py --input PATH_TO_OUTPUT_STEP_1 --idb PATH_TO_IDB_5YR_FILE`

@@ -57,6 +57,8 @@ def fix_worldbank_df(df, codes):
 def normalize_col(col, df: pd.DataFrame):
     col_max, col_min = df[col].max(), df[col].min()
     code = col.split("_")[0]
+    if code == "POP":
+        print("Population constants:", col_max, col_min, "col", col)
     def normalize_value(x):
         if not pd.notna(x):
             return x
